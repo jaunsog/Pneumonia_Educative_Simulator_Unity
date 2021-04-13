@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class itemScript : MonoBehaviour
+public class itemScript : MonoBehaviour, IAction
 {
     // Start is called before the first frame update
     public Rigidbody rb;
@@ -11,6 +11,7 @@ public class itemScript : MonoBehaviour
     public float pickUpRange;
     public float dropForwardForce, dropUpwardForce;
     public bool equipped=false;
+    public bool activated = false;
     public static bool slotFull;
     public Vector3 LastScale;
     public Vector3 LastPosition;
@@ -33,6 +34,13 @@ public class itemScript : MonoBehaviour
     }
 
     // Update is called once per frame
+    public void Activate()
+    {
+        Vector3 distanceToPlayer = player.position - transform.position;
+        if (!equipped && distanceToPlayer.magnitude <= pickUpRange && Input.GetKeyDown(KeyCode.E) && !slotFull) PickUp();
+
+        if (equipped && Input.GetKeyDown(KeyCode.Mouse0)) Drop();
+    }
     void Update()
     {
         Vector3 distanceToPlayer = player.position - transform.position;
