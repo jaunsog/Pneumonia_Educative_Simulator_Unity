@@ -51,10 +51,15 @@ public class CheckInteraction : MonoBehaviour
 
     private UI ui;
 
+    private Camera_Controller cam;
+
+    [SerializeField]
+    private string mensajeSalteableBoton;
 
     private void Start()
     {
         ui = FindObjectOfType<UI>();
+        cam = FindObjectOfType<Camera_Controller>();
     }
 
     void Update()
@@ -88,7 +93,12 @@ public class CheckInteraction : MonoBehaviour
             {
                 currentReceiver.Activate();
             }
-            
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                Debug.Log("Tecla F pulsada");
+                cam.UnlockMouse();
+                ui.MostrarMensajeSalteableBoton(mensajeSalteableBoton);
+            }
         }
 
     }

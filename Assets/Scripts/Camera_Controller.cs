@@ -6,6 +6,7 @@ public class Camera_Controller : MonoBehaviour
 {
     public float mouseSensitivity = 200f;
     public Transform playerBody;
+    private bool unlocked = false;
     float xRotation=0f;
     // Start is called before the first frame update
     void Start()
@@ -16,12 +17,35 @@ public class Camera_Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-        transform.localRotation =Quaternion.Euler(xRotation,0f,0f);
-        playerBody.Rotate(Vector3.up * mouseX);
-        
+        if (unlocked)
+        {
+
+        }
+        else
+        {
+            float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+            float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+            xRotation -= mouseY;
+            xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+            transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+            playerBody.Rotate(Vector3.up * mouseX);
+
+        }
+
     }
+
+    public void UnlockMouse()
+    {
+        unlocked = true;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    public void LockMouse()
+    {
+        unlocked = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
 }

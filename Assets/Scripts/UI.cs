@@ -46,15 +46,38 @@ public class UI : MonoBehaviour
     [SerializeField]
     private GameObject messageTextGameObject;
 
+    [SerializeField]
+    private GameObject mensajeSalteableBotonObjeto; //Contenedor
+    [SerializeField]
+    private Text mensajeSalteableBotonTexto; //Objeto Texto
+    private bool mensajeSalteableBotonActivo; //Estado del mensaje
+
+    private Camera_Controller cam;
+
+
     private Text messageText;
 
     void Start()
     {
         messageText = messageTextGameObject.GetComponent<Text>();
         messageGameObject.SetActive(false);
+        mensajeSalteableBotonObjeto.SetActive(false);
+        cam = FindObjectOfType<Camera_Controller>();
 
     }
-    
+
+    private void OnGUI()
+    {
+        if (mensajeSalteableBotonActivo)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                LimpiarMensajeBoton();
+                
+            }
+        }
+    }
+
     void FixedUpdate()
     {
         clearMessage();
@@ -70,4 +93,28 @@ public class UI : MonoBehaviour
     {
         messageGameObject.SetActive(false);
     }
+
+
+    public void MostrarMensajeSalteableBoton(string mensaje)
+    {
+        mensajeSalteableBotonActivo = true;
+        mensajeSalteableBotonTexto.text = mensaje;
+        mensajeSalteableBotonObjeto.SetActive(true);
+    }
+
+    public void BotonSaltarMensaje()
+    {
+        if (mensajeSalteableBotonActivo)
+        {
+            LimpiarMensajeBoton();
+            cam.LockMouse();
+        }
+    }
+
+    private void LimpiarMensajeBoton()
+    {
+        mensajeSalteableBotonActivo = false;
+        mensajeSalteableBotonObjeto.SetActive(false);
+    }
+
 }
