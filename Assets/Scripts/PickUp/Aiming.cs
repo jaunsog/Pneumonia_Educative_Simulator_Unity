@@ -9,7 +9,6 @@ public class Aiming : MonoBehaviour
     public Material realMaterial, MaterialContainer;
     private bool elegido = false;
     private bool equipped = false;
-
     public Transform gunContainer, fpsCam, selection, Item, TransformContainer, ActualParent;
     public Vector3 distanceToPlayer;
     private Collider ItemCollider;
@@ -90,7 +89,6 @@ public class Aiming : MonoBehaviour
                 NoContainers = selection.tag.Split('.');
                 if (!equipped && NoContainers[0] != "Container")
                 {
-
                     selectionRenderer.material = highlightMaterial; //changes to "highlight" color
                 }
             }
@@ -165,17 +163,17 @@ public class Aiming : MonoBehaviour
         ItemCollider.isTrigger = false;
         Item.SetParent(selection);
         ActualStep = ActualStep + 1;
-        if (ActualStep == 5)
-        {
-            var Viejos = GameObject.FindGameObjectsWithTag("1");
-            foreach (GameObject Viejo in Viejos)
-            {
-                Viejo.tag = "5";
-            }
-        }
         if (ActualStep == 6)
         {
-            var Activados = GameObject.FindGameObjectsWithTag("6");
+            var Viejos = GameObject.FindGameObjectsWithTag("2");
+            foreach (GameObject Viejo in Viejos)
+            {
+                Viejo.tag = "6";
+            }
+        }
+        if (ActualStep == 7)
+        {
+            var Activados = GameObject.FindGameObjectsWithTag("7");
             foreach (GameObject Activado in Activados)
             {
                 Activado.layer = 0;

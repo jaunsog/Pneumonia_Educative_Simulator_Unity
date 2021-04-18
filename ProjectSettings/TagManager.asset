@@ -16,6 +16,8 @@ TagManager:
   - Container.5
   - 6
   - Container.6
+  - 7
+  - Container.7
   layers:
   - Default
   - TransparentFX
