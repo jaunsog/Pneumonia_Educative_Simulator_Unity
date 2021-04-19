@@ -55,7 +55,6 @@ public class UI : MonoBehaviour
     private Camera_Controller cam;
     private Aiming aim;
 
-
     private Text messageText;
 
     void Start()
@@ -65,7 +64,6 @@ public class UI : MonoBehaviour
         mensajeSalteableBotonObjeto.SetActive(false);
         cam = FindObjectOfType<Camera_Controller>();
         aim = FindObjectOfType<Aiming>();
-
 
     }
 
@@ -112,7 +110,6 @@ public class UI : MonoBehaviour
             LimpiarMensajeBoton();
             cam.LockMouse();
             aim.Menu();
-
         }
     }
 

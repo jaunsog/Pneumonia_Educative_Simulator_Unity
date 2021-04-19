@@ -25,10 +25,8 @@ public class Aiming : MonoBehaviour
     private Instructions instr;
     private UI ui;
     private Camera_Controller cam;
-<<<<<<< Updated upstream
-=======
     private bool menuactive = false;
->>>>>>> Stashed changes
+
 
     // Start is called before the first frame update
     void Start()
