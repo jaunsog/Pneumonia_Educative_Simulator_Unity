@@ -53,11 +53,8 @@ public class UI : MonoBehaviour
     private bool mensajeSalteableBotonActivo; //Estado del mensaje
 
     private Camera_Controller cam;
-<<<<<<< Updated upstream
-
-=======
     private Aiming aim;
->>>>>>> Stashed changes
+
 
     private Text messageText;
 
@@ -67,10 +64,8 @@ public class UI : MonoBehaviour
         messageGameObject.SetActive(false);
         mensajeSalteableBotonObjeto.SetActive(false);
         cam = FindObjectOfType<Camera_Controller>();
-<<<<<<< Updated upstream
-=======
         aim = FindObjectOfType<Aiming>();
->>>>>>> Stashed changes
+
 
     }
 
@@ -116,10 +111,8 @@ public class UI : MonoBehaviour
         {
             LimpiarMensajeBoton();
             cam.LockMouse();
-<<<<<<< Updated upstream
-=======
             aim.Menu();
->>>>>>> Stashed changes
+
         }
     }
 

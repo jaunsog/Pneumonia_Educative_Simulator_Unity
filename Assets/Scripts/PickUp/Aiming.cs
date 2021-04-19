@@ -59,11 +59,7 @@ public class Aiming : MonoBehaviour
                 selection = null;
                 elegido = !elegido;
             }
-<<<<<<< Updated upstream
-            if (!equipped)
-=======
             if (!equipped && selection != null)
->>>>>>> Stashed changes
             {
                 if (selection.tag != ActualStep.ToString())
                 {
@@ -72,15 +68,10 @@ public class Aiming : MonoBehaviour
                     {
                         cam.UnlockMouse();
                         ui.MostrarMensajeSalteableBoton(mensajeSalteableBoton);
-<<<<<<< Updated upstream
-                    }
-                } else 
-=======
                         menuactive = true;
                     }
                 }
                 else
->>>>>>> Stashed changes
                 if (selection.tag == ActualStep.ToString())
                 {
                     instr.showInteract("Press E to interact");
@@ -93,16 +84,10 @@ public class Aiming : MonoBehaviour
                     {
                         cam.UnlockMouse();
                         ui.MostrarMensajeSalteableBoton(mensajeSalteableBoton);
-<<<<<<< Updated upstream
-                    }
-                }
-                
-=======
                         menuactive = true;
                     }
                 }
 
->>>>>>> Stashed changes
             }
             if (equipped)
             {
@@ -137,11 +122,7 @@ public class Aiming : MonoBehaviour
             {
                 Cancel();
             }
-<<<<<<< Updated upstream
-            
-=======
 
->>>>>>> Stashed changes
         }
     }
 
