@@ -25,6 +25,10 @@ public class Aiming : MonoBehaviour
     private Instructions instr;
     private UI ui;
     private Camera_Controller cam;
+<<<<<<< Updated upstream
+=======
+    private bool menuactive = false;
+>>>>>>> Stashed changes
 
     // Start is called before the first frame update
     void Start()
@@ -42,7 +46,7 @@ public class Aiming : MonoBehaviour
         Hitting = Physics.Raycast(ray, out hit);
         if (Physics.Raycast(ray, out hit))
         {
-            if (selection == hit.collider.transform || selection == null)
+            if ((selection == hit.collider.transform || selection == null) && !menuactive)
             {
                 Aim(hit);
             }
@@ -55,7 +59,11 @@ public class Aiming : MonoBehaviour
                 selection = null;
                 elegido = !elegido;
             }
+<<<<<<< Updated upstream
             if (!equipped)
+=======
+            if (!equipped && selection != null)
+>>>>>>> Stashed changes
             {
                 if (selection.tag != ActualStep.ToString())
                 {
@@ -64,8 +72,15 @@ public class Aiming : MonoBehaviour
                     {
                         cam.UnlockMouse();
                         ui.MostrarMensajeSalteableBoton(mensajeSalteableBoton);
+<<<<<<< Updated upstream
                     }
                 } else 
+=======
+                        menuactive = true;
+                    }
+                }
+                else
+>>>>>>> Stashed changes
                 if (selection.tag == ActualStep.ToString())
                 {
                     instr.showInteract("Press E to interact");
@@ -78,9 +93,16 @@ public class Aiming : MonoBehaviour
                     {
                         cam.UnlockMouse();
                         ui.MostrarMensajeSalteableBoton(mensajeSalteableBoton);
+<<<<<<< Updated upstream
                     }
                 }
                 
+=======
+                        menuactive = true;
+                    }
+                }
+
+>>>>>>> Stashed changes
             }
             if (equipped)
             {
@@ -115,9 +137,19 @@ public class Aiming : MonoBehaviour
             {
                 Cancel();
             }
+<<<<<<< Updated upstream
             
+=======
+
+>>>>>>> Stashed changes
         }
     }
+
+    public void Menu()
+    {
+        menuactive = false;
+    }
+
     private void Aim(RaycastHit hit)
     {
 

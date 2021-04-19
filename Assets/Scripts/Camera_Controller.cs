@@ -7,7 +7,11 @@ public class Camera_Controller : MonoBehaviour
     public float mouseSensitivity = 200f;
     public Transform playerBody;
     private bool unlocked = false;
+<<<<<<< Updated upstream
     float xRotation=0f;
+=======
+    float xRotation = 0f;
+>>>>>>> Stashed changes
     // Start is called before the first frame update
     void Start()
     {
