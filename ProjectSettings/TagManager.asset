@@ -3,7 +3,21 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - 4
+  - Container.6
+  - Container.1
+  - Container.2
+  - 7
+  - 3
+  - 5
+  - Container.7
+  - Container.5
+  - Container.3
+  - Container.4
+  - 2
+  - 1
+  - 6
   layers:
   - Default
   - TransparentFX

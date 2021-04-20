@@ -46,6 +46,7 @@ public class Aiming : MonoBehaviour
         {
             if ((selection == hit.collider.transform || selection == null) && !menuactive)
             {
+                
                 Aim(hit);
             }
             else if (elegido)
@@ -59,13 +60,14 @@ public class Aiming : MonoBehaviour
             }
             if (!equipped && selection != null)
             {
+                //Debug.Log(selection.name);
                 if (selection.tag != ActualStep.ToString())
                 {
                     instr.showInspect("Press F to inspect");
                     if (Input.GetKeyDown(KeyCode.F))
                     {
                         cam.UnlockMouse();
-                        ui.MostrarMensajeSalteableBoton(mensajeSalteableBoton);
+                        ui.MostrarMensajeSalteableBoton(selection.name);
                         menuactive = true;
                     }
                 }
@@ -81,7 +83,7 @@ public class Aiming : MonoBehaviour
                     if (Input.GetKeyDown(KeyCode.F))
                     {
                         cam.UnlockMouse();
-                        ui.MostrarMensajeSalteableBoton(mensajeSalteableBoton);
+                        ui.MostrarMensajeSalteableBoton(selection.name);
                         menuactive = true;
                     }
                 }

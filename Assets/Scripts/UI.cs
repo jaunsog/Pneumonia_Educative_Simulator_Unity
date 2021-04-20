@@ -54,8 +54,10 @@ public class UI : MonoBehaviour
 
     private Camera_Controller cam;
     private Aiming aim;
+    private Setexts descript;
 
     private Text messageText;
+    private string inspectext;
 
     void Start()
     {
@@ -64,6 +66,7 @@ public class UI : MonoBehaviour
         mensajeSalteableBotonObjeto.SetActive(false);
         cam = FindObjectOfType<Camera_Controller>();
         aim = FindObjectOfType<Aiming>();
+        descript = FindObjectOfType<Setexts>();
 
     }
 
@@ -99,7 +102,11 @@ public class UI : MonoBehaviour
     public void MostrarMensajeSalteableBoton(string mensaje)
     {
         mensajeSalteableBotonActivo = true;
-        mensajeSalteableBotonTexto.text = mensaje;
+        //inspectext = mensaje;
+        Debug.Log("UI entering: " + mensaje);
+        descript.getName(mensaje);
+        inspectext = descript.chooseDefinition();
+        mensajeSalteableBotonTexto.text = inspectext;
         mensajeSalteableBotonObjeto.SetActive(true);
     }
 
@@ -108,8 +115,7 @@ public class UI : MonoBehaviour
         if (mensajeSalteableBotonActivo)
         {
             LimpiarMensajeBoton();
-            cam.LockMouse();
-            aim.Menu();
+            
         }
     }
 
@@ -117,6 +123,8 @@ public class UI : MonoBehaviour
     {
         mensajeSalteableBotonActivo = false;
         mensajeSalteableBotonObjeto.SetActive(false);
+        cam.LockMouse();
+        aim.Menu();
     }
 
 }
