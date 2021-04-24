@@ -220,21 +220,38 @@ public class Aiming : MonoBehaviour
         ItemCollider.isTrigger = false;
         Item.SetParent(selection);
         ActualStep = ActualStep + 1;
-        if (ActualStep == 6)
+        if (ActualStep == 7)
         {
             var Viejos = GameObject.FindGameObjectsWithTag("2");
             foreach (GameObject Viejo in Viejos)
             {
-                Viejo.tag = "6";
+                Viejo.tag = "7";
             }
         }
-        if (ActualStep == 7)
+        if (ActualStep == 8)
         {
-            var Activados = GameObject.FindGameObjectsWithTag("7");
+            var Activados = GameObject.FindGameObjectsWithTag("8");
             foreach (GameObject Activado in Activados)
             {
                 Activado.layer = 0;
             }
+            Activados = GameObject.FindGameObjectsWithTag("Untagged");
+            foreach (GameObject Activado in Activados)
+            {
+                Activado.layer = 2;
+            }
+            var Contenedores =GameObject.FindGameObjectWithTag("4");
+            
+                Contenedores.layer = 2;
+            
+            Contenedores =GameObject.FindGameObjectWithTag("5");
+            
+                Contenedores.layer = 2;
+            
+            Contenedores =GameObject.FindGameObjectWithTag("6");
+            
+                Contenedores.layer = 2;
+            
         }
         //if (ActualStep == 5)
         //{

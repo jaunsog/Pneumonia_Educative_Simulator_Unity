@@ -8,7 +8,7 @@ public class itemScript : MonoBehaviour, IAction
     public Rigidbody rb;
     public BoxCollider coll;
     public Transform player, gunContainer, fpsCam;
-    public float pickUpRange;
+    public float pickUpRange=1;
     public float dropForwardForce, dropUpwardForce;
     public bool equipped=false;
     public bool activated = false;
@@ -17,6 +17,11 @@ public class itemScript : MonoBehaviour, IAction
     public Vector3 LastPosition;
     public Quaternion LastRotation;
     public Transform LastParent;
+    
+    [SerializeField] private Material HightlightedMaterial;
+    private Renderer RendererElemento;
+    private Material MaterialReal;
+    private bool selected=false;
     void Start()
     {
         if(!equipped)
@@ -43,8 +48,24 @@ public class itemScript : MonoBehaviour, IAction
     }
     void Update()
     {
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Vector3 distanceToPlayer = player.position - transform.position;
-        if(!equipped && distanceToPlayer.magnitude <= pickUpRange&& Input.GetKeyDown(KeyCode.E) && !slotFull) PickUp();
+       
+        var vector1 = ray.direction;
+        var vector2 = transform.localPosition-ray.origin;
+        var lookPercentage = Vector3.Dot(vector1.normalized,vector2.normalized);
+        
+        if(lookPercentage >=0.98 && distanceToPlayer.magnitude <= pickUpRange&&selected==false){
+            RendererElemento=transform.GetComponent<Renderer>();
+            MaterialReal=RendererElemento.material;
+            RendererElemento.material=HightlightedMaterial;
+            selected=true;
+        }else if (selected==true && (lookPercentage <0.98 || distanceToPlayer.magnitude > pickUpRange))
+        {
+            selected=false;
+            RendererElemento.material=MaterialReal;
+        }
+        if(lookPercentage >=0.98 && !equipped && distanceToPlayer.magnitude <= pickUpRange&& Input.GetKeyDown(KeyCode.E) && !slotFull) PickUp();
 
         if(equipped&& Input.GetKeyDown(KeyCode.Mouse0)) Drop();
     }
