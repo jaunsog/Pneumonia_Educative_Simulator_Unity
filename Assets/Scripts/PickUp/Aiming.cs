@@ -25,6 +25,7 @@ public class Aiming : MonoBehaviour
     private Instructions instr;
     private UI ui;
     private Camera_Controller cam;
+    private Player_Controller player;
     private bool menuactive = false;
 
 
@@ -34,6 +35,11 @@ public class Aiming : MonoBehaviour
         instr = FindObjectOfType<Instructions>();
         ui = FindObjectOfType<UI>();
         cam = FindObjectOfType<Camera_Controller>();
+        player = FindObjectOfType<Player_Controller>();
+        ui.MostrarMensajeSalteableBoton("init");
+        cam.UnlockMouse();
+        player.speed = 0f;
+        menuactive = true;
     }
 
     // Update is called once per frame
@@ -67,6 +73,7 @@ public class Aiming : MonoBehaviour
                     if (Input.GetKeyDown(KeyCode.F))
                     {
                         cam.UnlockMouse();
+                        player.speed = 0f;
                         ui.MostrarMensajeSalteableBoton(selection.name);
                         menuactive = true;
                     }
@@ -83,6 +90,7 @@ public class Aiming : MonoBehaviour
                     if (Input.GetKeyDown(KeyCode.F))
                     {
                         cam.UnlockMouse();
+                        player.speed= 0f;
                         ui.MostrarMensajeSalteableBoton(selection.name);
                         menuactive = true;
                     }
@@ -129,6 +137,7 @@ public class Aiming : MonoBehaviour
     public void Menu()
     {
         menuactive = false;
+        player.speed = 12f;
     }
 
     private void Aim(RaycastHit hit)

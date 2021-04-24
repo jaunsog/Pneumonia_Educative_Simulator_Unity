@@ -30,6 +30,24 @@ public class Setexts : MonoBehaviour
             case "Humidifier":
                 description = "This is a Humidifier, it adds humidity to dry Oxigen.";
                 break;
+            case "ConverterGreen":
+                description = "This part of the Venturi Mask is a jet and it goes at the end of the Tube. Its valve delivers 6 liters of Oxygen per minute and sets the Concentration to 35%. ";
+                break;
+            case "ConverterWhite":
+                description = "This part of the Venturi Mask is a jet and it goes at the end of the Tube. Its valve delivers 4 liters of Oxygen per minute and sets the Concentration to 31%.";
+                break;
+            case "ConverterBlue":
+                description = "This part of the Venturi Mask is a jet and it goes at the end of the Tube. Its valve delivers 2 liters of Oxygen per minute and sets the Concentration to 24%.";
+                break;
+            case "ConverterYellow":
+                description = "This part of the Venturi Mask is a jet and it goes at the end of the Tube. Its valve delivers 4 liters of Oxygen per minute and sets the Concentration to 28%.";
+                break;
+            case "Tube":
+                description = "This part of the Venturi Mask is a corrugated tube that allows the Assembly of the mask and the jet.";
+                break;
+            case "init":
+                description = "Welcome to St. Little Jesus Hospital, you will be assisting John Doe, he is 58 years old and is having trouble to breath, please ask him more about his current situation.";
+                break;
             default:
                 description = "Getting description...";
                 break;

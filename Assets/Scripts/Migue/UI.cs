@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using UnityEngine.UI;
 
 public class UI : MonoBehaviour
@@ -49,7 +50,7 @@ public class UI : MonoBehaviour
     [SerializeField]
     private GameObject mensajeSalteableBotonObjeto; //Contenedor
     [SerializeField]
-    private Text mensajeSalteableBotonTexto; //Objeto Texto
+    public TMP_Text mensajeSalteableBotonTexto; //Objeto Texto
     private bool mensajeSalteableBotonActivo; //Estado del mensaje
 
     private Camera_Controller cam;
@@ -67,7 +68,6 @@ public class UI : MonoBehaviour
         cam = FindObjectOfType<Camera_Controller>();
         aim = FindObjectOfType<Aiming>();
         descript = FindObjectOfType<Setexts>();
-
     }
 
     private void OnGUI()
