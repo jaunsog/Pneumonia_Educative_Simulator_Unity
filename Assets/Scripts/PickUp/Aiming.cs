@@ -18,10 +18,22 @@ public class Aiming : MonoBehaviour
     private Vector3 PreviousPosition;
     private Quaternion PreviousRotation;
     public bool Hitting;
+
+    [SerializeField]
+    private string mensajeSalteableBoton;
+
+    private Instructions instr;
+    private UI ui;
+    private Camera_Controller cam;
+    private bool menuactive = false;
+
+
     // Start is called before the first frame update
     void Start()
     {
-
+        instr = FindObjectOfType<Instructions>();
+        ui = FindObjectOfType<UI>();
+        cam = FindObjectOfType<Camera_Controller>();
     }
 
     // Update is called once per frame
@@ -32,8 +44,9 @@ public class Aiming : MonoBehaviour
         Hitting = Physics.Raycast(ray, out hit);
         if (Physics.Raycast(ray, out hit))
         {
-            if (selection == hit.collider.transform || selection == null)
+            if ((selection == hit.collider.transform || selection == null) && !menuactive)
             {
+                
                 Aim(hit);
             }
             else if (elegido)
@@ -45,13 +58,46 @@ public class Aiming : MonoBehaviour
                 selection = null;
                 elegido = !elegido;
             }
-            if (!equipped && Input.GetKeyDown(KeyCode.E) && selection.tag == ActualStep.ToString())
+            if (!equipped && selection != null)
             {
-                PickUp();
+                //Debug.Log(selection.name);
+                if (selection.tag != ActualStep.ToString())
+                {
+                    instr.showInspect("Press F to inspect");
+                    if (Input.GetKeyDown(KeyCode.F))
+                    {
+                        cam.UnlockMouse();
+                        ui.MostrarMensajeSalteableBoton(selection.name);
+                        menuactive = true;
+                    }
+                }
+                else
+                if (selection.tag == ActualStep.ToString())
+                {
+                    instr.showInteract("Press E to interact");
+                    instr.showInspect("Press F to inspect");
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        PickUp();
+                    }
+                    if (Input.GetKeyDown(KeyCode.F))
+                    {
+                        cam.UnlockMouse();
+                        ui.MostrarMensajeSalteableBoton(selection.name);
+                        menuactive = true;
+                    }
+                }
+
             }
-            if (equipped && Input.GetKeyDown(KeyCode.R))
+            if (equipped)
             {
-                Cancel();
+                instr.showCancel("Press R to cancel selection");
+                instr.showInteract("Press Q to place");
+                if (Input.GetKeyDown(KeyCode.R))
+                {
+                    Cancel();
+                }
+
             }
 
             if (equipped && Input.GetKeyDown(KeyCode.Q) && selection.tag == "Container." + ActualStep.ToString())
@@ -69,11 +115,22 @@ public class Aiming : MonoBehaviour
                 selectionRenderer.material = realMaterial;
             }
         }
-        else if (equipped && Input.GetKeyDown(KeyCode.R))
+        else if (equipped)
         {
-            Cancel();
+            instr.showCancel("Press R to cancel selection");
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                Cancel();
+            }
+
         }
     }
+
+    public void Menu()
+    {
+        menuactive = false;
+    }
+
     private void Aim(RaycastHit hit)
     {
 
@@ -163,21 +220,38 @@ public class Aiming : MonoBehaviour
         ItemCollider.isTrigger = false;
         Item.SetParent(selection);
         ActualStep = ActualStep + 1;
-        if (ActualStep == 6)
+        if (ActualStep == 7)
         {
             var Viejos = GameObject.FindGameObjectsWithTag("2");
             foreach (GameObject Viejo in Viejos)
             {
-                Viejo.tag = "6";
+                Viejo.tag = "7";
             }
         }
-        if (ActualStep == 7)
+        if (ActualStep == 8)
         {
-            var Activados = GameObject.FindGameObjectsWithTag("7");
+            var Activados = GameObject.FindGameObjectsWithTag("8");
             foreach (GameObject Activado in Activados)
             {
                 Activado.layer = 0;
             }
+            Activados = GameObject.FindGameObjectsWithTag("Untagged");
+            foreach (GameObject Activado in Activados)
+            {
+                Activado.layer = 2;
+            }
+            var Contenedores =GameObject.FindGameObjectWithTag("4");
+            
+                Contenedores.layer = 2;
+            
+            Contenedores =GameObject.FindGameObjectWithTag("5");
+            
+                Contenedores.layer = 2;
+            
+            Contenedores =GameObject.FindGameObjectWithTag("6");
+            
+                Contenedores.layer = 2;
+            
         }
         //if (ActualStep == 5)
         //{

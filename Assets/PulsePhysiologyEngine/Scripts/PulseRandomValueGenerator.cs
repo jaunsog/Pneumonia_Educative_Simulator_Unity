@@ -11,7 +11,7 @@ public class PulseRandomValueGenerator : PulseDataSource
   public float minValue = 0;      // Minimum value
   public float maxValue = 100;    // Maximum value
   [Range(0f, 1f)]
-  public float variability = .1f; // How similar to the previous value we are
+  public float variability = 0f; // How similar to the previous value we are
   [Range(0f, 120f)]
   public float frequency = 0;     // How fast do we generate a new value
 
