@@ -27,7 +27,7 @@ public class Interaction : MonoBehaviour
     public float BSpo2=98f;
     public Aiming ActualStep;
     private bool controlador=false;
-    public TMP_Text Text;
+    //public TMP_Text Text;
     private float tiempoPrevio=10000000;
     private float t;
     public float Spo2Previo,BpmPrevio, previousStep;
@@ -50,7 +50,7 @@ public class Interaction : MonoBehaviour
     
         if(ActualStep.ActualStep==0)
         {
-            Text.text="Analiza el estado del paciente";
+            //Text.text="Analiza el estado del paciente";
             previousStep=ActualStep.ActualStep;
             Spo2Previo=Spo2.multiplier;
             BpmPrevio=Bpm.multiplier;
@@ -58,11 +58,11 @@ public class Interaction : MonoBehaviour
         if(Time.time>5&&ActualStep.ActualStep==0)
         {
             ActualStep.ActualStep=1;
-            Text.text="¡Realiza el tratamiento adecuado!";
+            //Text.text="¡Realiza el tratamiento adecuado!";
         }
         if (ActualStep.ActualStep==3)
         {
-           Text.text="Analiza el estado del paciente";
+           //Text.text="Analiza el estado del paciente";
            CambioInicialMedioBueno();
         }
         if ((ActualStep.ActualStep>0&&ActualStep.ActualStep<3)||(ActualStep.ActualStep>=4&&ActualStep.ActualStep<=7))

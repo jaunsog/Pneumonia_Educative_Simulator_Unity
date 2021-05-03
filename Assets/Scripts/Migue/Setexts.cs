@@ -48,6 +48,9 @@ public class Setexts : MonoBehaviour
             case "init":
                 description = "Welcome to St. Little Jesus Hospital, you will be assisting John Doe, he is 58 years old and is having trouble to breath, please ask him more about his current situation.";
                 break;
+            case "Oxigen":
+                description = "This is the source of Oxygen, you can adjust the Oxygen flow depending on the circumstances. Please select a valid number of Oxygen flow (In liters per minute)";
+                break;
             default:
                 description = "Getting description...";
                 break;
