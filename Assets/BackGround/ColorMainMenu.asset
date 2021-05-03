@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54d21f6ece3b46479f0c328f8c6007e0, type: 3}
   m_Name: ColorMainMenu
   m_EditorClassIdentifier: 
-  colorMode: 3
-  topLeft: {r: 0.9716981, g: 0.5732948, b: 0.050418302, a: 1}
-  topRight: {r: 1, g: 0.48748046, b: 0, a: 1}
-  bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-  bottomRight: {r: 0.9245283, g: 0.567209, b: 0, a: 1}
+  colorMode: 1
+  topLeft: {r: 1, g: 1, b: 1, a: 0.7607843}
+  topRight: {r: 1, g: 0.8999224, b: 0.23529412, a: 0.92941177}
+  bottomLeft: {r: 1, g: 1, b: 1, a: 0.7607843}
+  bottomRight: {r: 1, g: 0.8999224, b: 0.23529412, a: 0.92941177}

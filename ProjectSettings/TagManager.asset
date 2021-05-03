@@ -20,6 +20,10 @@ TagManager:
   - Container.7
   - 8
   - Container.8
+  - Activable.1
+  - Activable.2
+  - No
+  - Read
   layers:
   - Default
   - TransparentFX

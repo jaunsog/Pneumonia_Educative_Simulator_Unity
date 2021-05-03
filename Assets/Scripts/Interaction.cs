@@ -29,9 +29,10 @@ public class Interaction : MonoBehaviour
     private bool controlador=false;
     public TMP_Text Text;
     private float tiempoPrevio=10000000;
-    private float t;
+    private float t=0;
+    private float TiempoMuerto;
     public float Spo2Previo,BpmPrevio, previousStep;
-
+    public PausedMenu pausedMenu;
     // Start is called before the first frame update
     void Start()
     {
@@ -47,25 +48,23 @@ public class Interaction : MonoBehaviour
     }
     void Update()
     {   
-    
+        TiempoMuerto+=Time.deltaTime;
         if(ActualStep.ActualStep==0)
-        {
-            Text.text="Analiza el estado del paciente";
+        {   
             previousStep=ActualStep.ActualStep;
             Spo2Previo=Spo2.multiplier;
             BpmPrevio=Bpm.multiplier;
-        }
-        if(Time.time>5&&ActualStep.ActualStep==0)
-        {
             ActualStep.ActualStep=1;
-            Text.text="¡Realiza el tratamiento adecuado!";
+            //Text.text="¡Realiza el tratamiento adecuado!";
         }
+        
         if (ActualStep.ActualStep==3)
         {
-           Text.text="Analiza el estado del paciente";
+           //Text.text="Analiza el estado del paciente";
            CambioInicialMedioBueno();
+           TiempoMuerto=0;
         }
-        if ((ActualStep.ActualStep>0&&ActualStep.ActualStep<3)||(ActualStep.ActualStep>=4&&ActualStep.ActualStep<=7))
+        if (TiempoMuerto>60&&ActualStep.ActualStep<=7)
         {
             CambioMedioMalo();
         }
@@ -96,10 +95,14 @@ public class Interaction : MonoBehaviour
     }
     void CambioMedioMalo()
     {
-        t+=Time.deltaTime / 50;
-        Spo2.multiplier= Mathf.Lerp(Spo2Previo, 100*MMSpo2/97f, (Mathf.Exp(t)/2.718f)-1/1.359f);
-        Bpm.multiplier= Mathf.Lerp(BpmPrevio, MMBpm/73f, (Mathf.Exp(t)/2.718f)-1/1.359f);
+        t+=Time.deltaTime / 10;
+        Spo2.multiplier= Mathf.Lerp(Spo2Previo, 100*MMSpo2/97f, t);
+        Bpm.multiplier= Mathf.Lerp(BpmPrevio, MMBpm/73f, t);
         previousStep=ActualStep.ActualStep;
+        if (t>=1)
+        {
+            pausedMenu.EndGame();
+        }
     }
     void CambioBueno()
     {
@@ -113,5 +116,9 @@ public class Interaction : MonoBehaviour
         t+=Time.deltaTime / 50;
         Spo2.multiplier= Mathf.Lerp(Spo2Previo, 100*BSpo2/97f, (Mathf.Exp(t)/1.359f)-1/1.359f);
         Bpm.multiplier= Mathf.Lerp(BpmPrevio, BBpm/73f, (Mathf.Exp(t)/1.359f)-1/1.359f);
+        if(t>=1)
+        {
+            pausedMenu.GoodGame();
+        }
     } 
 }

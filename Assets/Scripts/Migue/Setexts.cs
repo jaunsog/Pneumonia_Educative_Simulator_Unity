@@ -30,6 +30,13 @@ public class Setexts : MonoBehaviour
             case "Humidifier":
                 description = "This is a Humidifier, it adds humidity to dry Oxigen.";
                 break;
+            case "init":
+                description = "Al servicio de urgencia, ingresa masculino, 58 años, con dificultad respiratoria, tos húmeda con expectoración verdosa de cinco (5) días de evolución. Al quinto día presenta fiebre y dificultad respiratoria. Lo observan taquipneico con tirajes subcostales e intercostales, al examen físico, destaca presencia murmullo vesicular disminuido en base pulmonar derecha con crépitos. Analice y atienda al paciente.";
+
+                break;
+            case "Character":
+                description = "Al servicio de urgencia, ingresa masculino, 58 años, con dificultad respiratoria, tos húmeda con expectoración verdosa de cinco (5) días de evolución. Al quinto día presenta fiebre y dificultad respiratoria. Lo observan taquipneico con tirajes subcostales e intercostales, al examen físico, destaca presencia murmullo vesicular disminuido en base pulmonar derecha con crépitos.";
+                break;
             default:
                 description = "Getting description...";
                 break;

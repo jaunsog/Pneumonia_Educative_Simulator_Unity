@@ -67,7 +67,6 @@ public class UI : MonoBehaviour
         cam = FindObjectOfType<Camera_Controller>();
         aim = FindObjectOfType<Aiming>();
         descript = FindObjectOfType<Setexts>();
-
     }
 
     private void OnGUI()
