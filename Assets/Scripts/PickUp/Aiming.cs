@@ -352,6 +352,7 @@ public class Aiming : MonoBehaviour
                     var lastConverter = selection.GetChild(0);
                     var originalPosition = GameObject.Find("Container-" + lastConverter.name);
                     lastConverter.SetParent(null);
+                    originalPosition.layer = 0; 
                     lastConverter.position = originalPosition.transform.position;
                     lastConverter.rotation = originalPosition.transform.rotation;
                 }
@@ -360,7 +361,7 @@ public class Aiming : MonoBehaviour
             catch { }
         }
         Item.SetParent(null);
-         if ( Item.tag!="4" && Item.tag!="5" && Item.tag!="6")
+         if ( selection.gameObject.name!="Final-Tube" && selection.gameObject.name!="Final-Converter" && selection.gameObject.name!="Final-Protector")
         {
             Item.gameObject.layer = 0;
         }

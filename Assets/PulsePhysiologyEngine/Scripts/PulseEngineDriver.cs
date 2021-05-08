@@ -125,6 +125,11 @@ public class PulseEngineDriver : PulseDataSource
   {
     // Ensure we only broadcast data if the application is playing
     // and there a valid pulse engine to simulate data from
+     SEPatientConfiguration cfg = new SEPatientConfiguration();
+    // Grab the patient and fill in some data
+    SEPatient patient = cfg.GetPatient();
+    patient.GetHeartRateBaseline().SetValue(120, FrequencyUnit.Per_min);
+
     if (!Application.isPlaying || engine == null || pauseUpdate)
       return;
 
@@ -147,14 +152,16 @@ public class PulseEngineDriver : PulseDataSource
       data.timeStampList.Add(previousTime);
 
       // Advance simulation by time step
-      bool success = engine.AdvanceTime_s(timeStep);
+      bool success = engine.AdvanceTime_s(timeStep);                       // "EEEEEENGINEEEEEEEE"
       if (!success)
         continue;
 
       // Copy simulated data to data container
       data_values = engine.PullData();
       for (int j = 0; j < data_values.Length; ++j)
+      {
         data.valuesTable[j].Add((float)data_values[j]);
+      }
     }
   }
 

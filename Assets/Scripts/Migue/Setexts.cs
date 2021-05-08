@@ -30,12 +30,26 @@ public class Setexts : MonoBehaviour
             case "Humidifier":
                 description = "This is a Humidifier, it adds humidity to dry Oxigen.";
                 break;
-            case "init":
-                description = "Al servicio de urgencia, ingresa masculino, 58 años, con dificultad respiratoria, tos húmeda con expectoración verdosa de cinco (5) días de evolución. Al quinto día presenta fiebre y dificultad respiratoria. Lo observan taquipneico con tirajes subcostales e intercostales, al examen físico, destaca presencia murmullo vesicular disminuido en base pulmonar derecha con crépitos. Analice y atienda al paciente.";
-
+            case "ConverterGreen":
+                description = "This part of the Venturi Mask is a jet and it goes at the end of the Tube. Its valve delivers 6 liters of Oxygen per minute and sets the Concentration to 35%. ";
                 break;
-            case "Character":
-                description = "Al servicio de urgencia, ingresa masculino, 58 años, con dificultad respiratoria, tos húmeda con expectoración verdosa de cinco (5) días de evolución. Al quinto día presenta fiebre y dificultad respiratoria. Lo observan taquipneico con tirajes subcostales e intercostales, al examen físico, destaca presencia murmullo vesicular disminuido en base pulmonar derecha con crépitos.";
+            case "ConverterWhite":
+                description = "This part of the Venturi Mask is a jet and it goes at the end of the Tube. Its valve delivers 4 liters of Oxygen per minute and sets the Concentration to 31%.";
+                break;
+            case "ConverterBlue":
+                description = "This part of the Venturi Mask is a jet and it goes at the end of the Tube. Its valve delivers 2 liters of Oxygen per minute and sets the Concentration to 24%.";
+                break;
+            case "ConverterYellow":
+                description = "This part of the Venturi Mask is a jet and it goes at the end of the Tube. Its valve delivers 4 liters of Oxygen per minute and sets the Concentration to 28%.";
+                break;
+            case "Tube":
+                description = "This part of the Venturi Mask is a corrugated tube that allows the Assembly of the mask and the jet.";
+                break;
+            case "init":
+                description = "Welcome to St. Little Jesus Hospital, you will be assisting John Doe, he is 58 years old and is having trouble to breath, please ask him more about his current situation.";
+                break;
+            case "Oxigen":
+                description = "This is the source of Oxygen, you can adjust the Oxygen flow depending on the circumstances. Please select a valid number of Oxygen flow (In liters per minute)";
                 break;
             default:
                 description = "Getting description...";

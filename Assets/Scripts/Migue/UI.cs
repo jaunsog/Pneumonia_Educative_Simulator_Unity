@@ -36,7 +36,6 @@ public class UI : MonoBehaviour
     * Besuch die Website, um weitere Artikel, Lösungen und Hilfsmittel zu finden. 
     *
     */
-
     [SerializeField]
     private float messageTime;
 
@@ -49,24 +48,33 @@ public class UI : MonoBehaviour
     [SerializeField]
     private GameObject mensajeSalteableBotonObjeto; //Contenedor
     [SerializeField]
-    private Text mensajeSalteableBotonTexto; //Objeto Texto
+    public Text mensajeSalteableBotonTexto; //Objeto Texto
     private bool mensajeSalteableBotonActivo; //Estado del mensaje
+    private bool readInputActivo;
+
+    [SerializeField]
+    private GameObject inputMessage;
+
 
     private Camera_Controller cam;
     private Aiming aim;
     private Setexts descript;
+    private ReadInput read;
 
     private Text messageText;
     private string inspectext;
+
 
     void Start()
     {
         messageText = messageTextGameObject.GetComponent<Text>();
         messageGameObject.SetActive(false);
+        inputMessage.SetActive(false);
         mensajeSalteableBotonObjeto.SetActive(false);
         cam = FindObjectOfType<Camera_Controller>();
         aim = FindObjectOfType<Aiming>();
         descript = FindObjectOfType<Setexts>();
+        read = FindObjectOfType<ReadInput>();
     }
 
     private void OnGUI()
@@ -98,19 +106,37 @@ public class UI : MonoBehaviour
     }
 
 
-    public void MostrarMensajeSalteableBoton(string mensaje)
+     public void MostrarMensajeSalteableBoton(string mensaje)
     {
         mensajeSalteableBotonActivo = true;
-        //inspectext = mensaje;
         Debug.Log("UI entering: " + mensaje);
         descript.getName(mensaje);
         inspectext = descript.chooseDefinition();
         mensajeSalteableBotonTexto.text = inspectext;
         mensajeSalteableBotonObjeto.SetActive(true);
+        if (mensaje =="Oxigen")
+        {
+            Debug.Log("Entrando a Presentar Input");
+            MostrarMensajeConInput(inspectext);
+        }
+    }
+
+    public void MostrarMensajeConInput(string mensaje)
+    {
+        inputMessage.SetActive(true);
+        mensajeSalteableBotonTexto.text = mensaje;
+
+        mensajeSalteableBotonObjeto.SetActive(true);
     }
 
     public void BotonSaltarMensaje()
     {
+        if (readInputActivo)
+        {
+            Debug.Log("Borrando Oxigeno");
+            read.ReadOxygen();
+            LimpiarMensajeBoton();
+        }else
         if (mensajeSalteableBotonActivo)
         {
             LimpiarMensajeBoton();
@@ -122,6 +148,7 @@ public class UI : MonoBehaviour
     {
         mensajeSalteableBotonActivo = false;
         mensajeSalteableBotonObjeto.SetActive(false);
+        inputMessage.SetActive(false);
         cam.LockMouse();
         aim.Menu();
     }

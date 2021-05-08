@@ -7,6 +7,5 @@ using UnityEngine;
 // to the pulse data container
 public abstract class PulseDataSource : MonoBehaviour
 {
-  [HideInInspector]
   public PulseData data;
 }
