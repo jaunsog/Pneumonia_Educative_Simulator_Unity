@@ -122,7 +122,7 @@ public class PulseCSVReader : PulseDataSource
       // Check the next data point time
       lineValues = CSVValues[lineId];
       dataTimeStr = lineValues[0];
-      dataTime = float.Parse(dataTimeStr);
+      dataTime = 2*float.Parse(dataTimeStr);
     }
   }
 

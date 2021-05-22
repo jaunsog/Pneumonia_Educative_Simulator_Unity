@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using TMPro;
 public class Aiming : MonoBehaviour
 {
     [SerializeField] private Material highlightMaterial;
@@ -18,7 +19,7 @@ public class Aiming : MonoBehaviour
     private Vector3 PreviousPosition;
     private Quaternion PreviousRotation;
     public bool Hitting;
-    public GameObject CableInicioCannula, CableFinalCannula, CableInicioVenturi, CableFinalVenturi;
+    public GameObject CableInicioCannula, CableFinalCannula, CableInicioVenturi, CableFinalVenturi, LastParent;
     [SerializeField]
     private string mensajeSalteableBoton;
 
@@ -27,13 +28,17 @@ public class Aiming : MonoBehaviour
     private Camera_Controller cam;
     private Player_Controller player;
     private bool menuactive = false;
-
+    public TMP_Text SupText, Timer;
+    public PausedMenu pausedMenu;
+    private Quiz quiz;
     // Start is called before the first frame update
     void Start()
     {
+        quiz = FindObjectOfType<Quiz>();
         instr = FindObjectOfType<Instructions>();
         ui = FindObjectOfType<UI>();
         cam = FindObjectOfType<Camera_Controller>();
+        pausedMenu= FindObjectOfType<PausedMenu>();
         player = FindObjectOfType<Player_Controller>();
         ui.MostrarMensajeSalteableBoton("init");
         cam.UnlockMouse();
@@ -61,7 +66,7 @@ public class Aiming : MonoBehaviour
 
         }
         Hitting = Physics.Raycast(ray, out hit);
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit) && !pausedMenu.isPaused && !quiz.GOquices.activeSelf)
         {
             if ((selection == hit.collider.transform || selection == null) && !menuactive && hit.collider.transform.tag != "No")
             {
@@ -79,7 +84,7 @@ public class Aiming : MonoBehaviour
             }
             if (!equipped && selection != null)
             {
-                instr.showInspect("Press F to inspect");
+                instr.showInspect("F para inspeccionar");
                 if (Input.GetKeyDown(KeyCode.F))
                 {
                     cam.UnlockMouse();
@@ -89,7 +94,7 @@ public class Aiming : MonoBehaviour
                 }
                 if (hit.collider.transform.tag != "Read")
                 {
-                    instr.showInteract("Press E to interact");
+                    instr.showInteract("E para interactuar");
 
                     if (Input.GetKeyDown(KeyCode.E))
                     {
@@ -100,7 +105,7 @@ public class Aiming : MonoBehaviour
             }
             if (equipped)
             {
-                instr.showCancel("Press R to cancel selection");
+                instr.showCancel("R para cancelar la selección");
 
                 if (Input.GetKeyDown(KeyCode.R))
                 {
@@ -108,14 +113,16 @@ public class Aiming : MonoBehaviour
                 }
 
             }
+            if (selection!=null)
+            {
             if (equipped && selection.tag == "Container." + Item.tag)
             {
-                instr.showInteract("Press Q to place");
+                instr.showInteract("Q para colocar");
                 if (Input.GetKeyDown(KeyCode.Q))
                 {
                     Place();
                 }
-            }
+            }}
 
         }
         else if (elegido)
@@ -129,7 +136,7 @@ public class Aiming : MonoBehaviour
         }
         else if (equipped)
         {
-            instr.showCancel("Press R to cancel selection");
+            instr.showCancel("R para cancelar la selección");
             if (Input.GetKeyDown(KeyCode.R))
             {
                 Cancel();
@@ -148,7 +155,7 @@ public class Aiming : MonoBehaviour
     {
 
         distanceToPlayer = hit.collider.transform.position - transform.position;
-        if (distanceToPlayer.magnitude <= 10)
+        if (distanceToPlayer.magnitude <= 5)
         {
             if (!elegido)
             {
@@ -199,8 +206,9 @@ public class Aiming : MonoBehaviour
         }
         Item = selection;
         Item.gameObject.layer = 2;
-        PreviousPosition = Item.position;
-        PreviousRotation = Item.rotation;
+        PreviousPosition = Item.localPosition;
+        PreviousRotation = Item.localRotation;
+        LastParent=Item.transform.parent.gameObject;
         Item.SetParent(gunContainer);
         Item.position = Item.position - new Vector3(-0.3f, -0.1f, 0);
         ItemCollider.isTrigger = true;
@@ -307,8 +315,11 @@ public class Aiming : MonoBehaviour
             RendererContainer.material = Transparent;
         }
         Item.SetParent(null);
-        Item.position = PreviousPosition;
-        Item.rotation = PreviousRotation;
+        
+        Item.SetParent(LastParent.transform);
+        
+        Item.localPosition = PreviousPosition;
+        Item.localRotation = PreviousRotation;
         Item.gameObject.layer = 0;
         if (ActualStep == 7)
         {
@@ -330,6 +341,7 @@ public class Aiming : MonoBehaviour
         //    }
         //    TransformContainer.tag = "5";
         //}
+        SupText.text=SupText.text+Item.name+"-->"+selection.name+" "+Timer.text+"\n";
         fullVenturi.gameObject.layer = 0;
         equipped = !equipped;
        
@@ -352,7 +364,8 @@ public class Aiming : MonoBehaviour
                     var lastConverter = selection.GetChild(0);
                     var originalPosition = GameObject.Find("Container-" + lastConverter.name);
                     lastConverter.SetParent(null);
-                    originalPosition.layer = 0; 
+                    lastConverter.gameObject.layer = 0; 
+                    lastConverter.SetParent(originalPosition.transform);
                     lastConverter.position = originalPosition.transform.position;
                     lastConverter.rotation = originalPosition.transform.rotation;
                 }
@@ -371,7 +384,6 @@ public class Aiming : MonoBehaviour
         Item.rotation = selection.rotation;
         ItemCollider.isTrigger = false;
         Item.SetParent(selection);
-        ActualStep = ActualStep + 1;
         // if (ActualStep == 3)
         // {
         //     CableInicioCannula.SetActive(true);

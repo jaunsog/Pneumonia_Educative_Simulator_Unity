@@ -5,8 +5,8 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
+  - enabled: 0
+    path: Assets/Scenes/Main.unity
     guid: a802c371b28e89848a43a1a4aaf0e494
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
@@ -24,6 +24,15 @@ EditorBuildSettings:
     path: Assets/PulsePhysiologyEngine/Scenes/Dev/ScreenSpace.unity
     guid: 38fb26ac861956e4a9a893b05b00a940
   - enabled: 1
-    path: Assets/Scenes/2.unity
+    path: Assets/Scenes/MainMenu.unity
+    guid: eb4d0d9cbd935fd458d2934f08f1c969
+  - enabled: 1
+    path: Assets/Scenes/VersionJP.unity
     guid: 3dd856bbb03e60d4ab1392bbf3e2b441
+  - enabled: 0
+    path: Assets/Scenes/3.unity
+    guid: b82d0f1c42315334984d03b53f874539
+  - enabled: 0
+    path: Assets/Scenes/2 (1).unity
+    guid: 987c05328ee6a114ca72bba9bcf572a6
   m_configObjects: {}

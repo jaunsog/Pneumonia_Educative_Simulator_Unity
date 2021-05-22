@@ -63,7 +63,7 @@ public class UI : MonoBehaviour
 
     private Text messageText;
     private string inspectext;
-
+    public string inspectName;
 
     void Start()
     {
@@ -84,7 +84,6 @@ public class UI : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 LimpiarMensajeBoton();
-                
             }
         }
     }
@@ -110,11 +109,12 @@ public class UI : MonoBehaviour
     {
         mensajeSalteableBotonActivo = true;
         Debug.Log("UI entering: " + mensaje);
+        inspectName=mensaje;
         descript.getName(mensaje);
         inspectext = descript.chooseDefinition();
         mensajeSalteableBotonTexto.text = inspectext;
         mensajeSalteableBotonObjeto.SetActive(true);
-        if (mensaje =="Oxigen")
+        if (mensaje =="Oxigen" || mensaje == "PlaneScreen")
         {
             Debug.Log("Entrando a Presentar Input");
             MostrarMensajeConInput(inspectext);
@@ -131,16 +131,9 @@ public class UI : MonoBehaviour
 
     public void BotonSaltarMensaje()
     {
-        if (readInputActivo)
-        {
-            Debug.Log("Borrando Oxigeno");
-            read.ReadOxygen();
-            LimpiarMensajeBoton();
-        }else
         if (mensajeSalteableBotonActivo)
         {
             LimpiarMensajeBoton();
-            
         }
     }
 

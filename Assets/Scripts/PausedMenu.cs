@@ -9,35 +9,33 @@ public class PausedMenu : MonoBehaviour
     public GameObject pauseMenu,endMenu;
     public bool isPaused;
     private Camera_Controller cam;
-    public TMP_Text endText;
+    public TMP_Text endText,contadorTiempos, contadorPreguntas;
+    public GameObject pick, place;
+    private Interaction interaction;
+    private Quiz quiz;
     void Start()
     {
         pauseMenu.SetActive(false);
         endMenu.SetActive(false);
+        interaction= FindObjectOfType<Interaction>();
+        quiz=FindObjectOfType<Quiz>();
         cam = FindObjectOfType<Camera_Controller>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            EndGame();
-        }
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            GoodGame();
-        }
+        //if (Input.GetKeyDown(KeyCode.N))
+        //{
+        //    EndGame();
+        //}
+        //if (Input.GetKeyDown(KeyCode.M))
+        //{
+        //    GoodGame();
+        //}
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if(isPaused)
-            {
-                ResumeGame();
-            }
-            else
-            {
                 PauseGame();
-            }
         }
     }
     public void EndGame()
@@ -46,13 +44,18 @@ public class PausedMenu : MonoBehaviour
         endMenu.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
+        contadorTiempos.text="Tratamiento ideal: "+ (int) (interaction.tratGood)+"(S).\n\nTratamiento no ideal: "+(int) (interaction.tratMedium)+"(S).\n\nDesmejoramiento: "+(int) (interaction.tratBad)+"(S).";
+        contadorPreguntas.text="Preguntas correctas: "+(int) (quiz.RespuestasBuenas)+". \n\nPreguntas incorrectas: "+ quiz.RespuestasMalas; 
         endText.text= "El paciente tuvo que ser llevado a urgencias, el tratamiento no fue efectivo.";
          
         }
     public void GoodGame()
     {
+        
         cam.UnlockMouse();
         endMenu.SetActive(true);
+        contadorTiempos.text="Tratamiento ideal: "+ (int) (interaction.tratGood)+"(S).\n\nTratamiento no ideal: "+(int) (interaction.tratMedium)+"(S).\n\nDesmejoramiento: "+(int) (interaction.tratBad)+"(S).";
+        contadorPreguntas.text="Preguntas correctas: "+(int) (quiz.RespuestasBuenas)+". \n\nPreguntas incorrectas: "+ quiz.RespuestasMalas; 
         Time.timeScale=0f;
         isPaused=true;
         endText.text="El tratemiento fue un éxito, el paciente se mantendrá bajo observación, buen trabajo.";
